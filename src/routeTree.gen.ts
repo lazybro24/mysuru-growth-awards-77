@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as EventRouteImport } from './routes/event'
+import { Route as IntegrityRouteImport } from './routes/integrity'
+import { Route as JuryRouteImport } from './routes/jury'
+import { Route as AwardsIndexRouteImport } from './routes/awards/index'
+import { Route as AwardsSlugRouteImport } from './routes/awards/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventRoute = EventRouteImport.update({
+  id: '/event',
+  path: '/event',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IntegrityRoute = IntegrityRouteImport.update({
+  id: '/integrity',
+  path: '/integrity',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JuryRoute = JuryRouteImport.update({
+  id: '/jury',
+  path: '/jury',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AwardsIndexRoute = AwardsIndexRouteImport.update({
+  id: '/awards/',
+  path: '/awards/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AwardsSlugRoute = AwardsSlugRouteImport.update({
+  id: '/awards/$slug',
+  path: '/awards/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/event': typeof EventRoute
+  '/integrity': typeof IntegrityRoute
+  '/jury': typeof JuryRoute
+  '/awards/$slug': typeof AwardsSlugRoute
+  '/awards/': typeof AwardsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/event': typeof EventRoute
+  '/integrity': typeof IntegrityRoute
+  '/jury': typeof JuryRoute
+  '/awards/$slug': typeof AwardsSlugRoute
+  '/awards': typeof AwardsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/event': typeof EventRoute
+  '/integrity': typeof IntegrityRoute
+  '/jury': typeof JuryRoute
+  '/awards/$slug': typeof AwardsSlugRoute
+  '/awards/': typeof AwardsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/event'
+    | '/integrity'
+    | '/jury'
+    | '/awards/$slug'
+    | '/awards/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/event'
+    | '/integrity'
+    | '/jury'
+    | '/awards/$slug'
+    | '/awards'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/event'
+    | '/integrity'
+    | '/jury'
+    | '/awards/$slug'
+    | '/awards/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  EventRoute: typeof EventRoute
+  IntegrityRoute: typeof IntegrityRoute
+  JuryRoute: typeof JuryRoute
+  AwardsSlugRoute: typeof AwardsSlugRoute
+  AwardsIndexRoute: typeof AwardsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/event': {
+      id: '/event'
+      path: '/event'
+      fullPath: '/event'
+      preLoaderRoute: typeof EventRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/integrity': {
+      id: '/integrity'
+      path: '/integrity'
+      fullPath: '/integrity'
+      preLoaderRoute: typeof IntegrityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/jury': {
+      id: '/jury'
+      path: '/jury'
+      fullPath: '/jury'
+      preLoaderRoute: typeof JuryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/awards/': {
+      id: '/awards/'
+      path: '/awards'
+      fullPath: '/awards/'
+      preLoaderRoute: typeof AwardsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/awards/$slug': {
+      id: '/awards/$slug'
+      path: '/awards/$slug'
+      fullPath: '/awards/$slug'
+      preLoaderRoute: typeof AwardsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  EventRoute: EventRoute,
+  IntegrityRoute: IntegrityRoute,
+  JuryRoute: JuryRoute,
+  AwardsSlugRoute: AwardsSlugRoute,
+  AwardsIndexRoute: AwardsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
